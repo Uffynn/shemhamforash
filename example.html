@@ -27,6 +27,12 @@
             image-rendering: pixelated;
             margin-bottom: 5px;
             filter: drop-shadow(0 0 10px #ff69b4);
+            animation: float 3s ease-in-out infinite;
+        }
+        @keyframes float {
+            0% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0); }
         }
         .hero-text {
             font-size: 14px;
