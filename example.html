@@ -13,6 +13,7 @@
             margin: 0;
             padding: 10px;
             image-rendering: pixelated;
+            cursor: none;
         }
         .container {
             width: 90%;
@@ -89,7 +90,7 @@
         #promoTable td {
             text-align: center;
             vertical-align: middle;
-            height: 100px; /* Added to ensure vertical centering is visible */
+            height: 100px;
         }
         input[type="checkbox"] {
             width: 14px;
@@ -106,10 +107,45 @@
             border: 1px solid #800080;
             padding: 5px 10px;
             font-family: 'Press Start 2P', cursive;
-            cursor: pointer;
+            cursor: none;
+            transition: all 0.3s ease;
         }
         button:hover {
             background: #3a3a4e;
+        }
+        /* Custom cursor styles */
+        #custom-cursor {
+            position: fixed;
+            width: 20px;
+            height: 20px;
+            border: 2px solid #ff69b4;
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9999;
+            transform: translate(-50%, -50%);
+            transition: width 0.2s, height 0.2s, background 0.3s;
+            box-shadow: 0 0 10px #ff00ff, 0 0 20px rgba(255, 0, 255, 0.5);
+            mix-blend-mode: difference;
+        }
+        #custom-cursor.cursor-hover {
+            width: 30px;
+            height: 30px;
+            background: rgba(255, 105, 180, 0.3);
+            border-color: #00ffff;
+            box-shadow: 0 0 15px #00ffff, 0 0 30px rgba(0, 255, 255, 0.5);
+        }
+        .cursor-trail {
+            position: fixed;
+            width: 8px;
+            height: 8px;
+            background: #ff69b4;
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9998;
+            opacity: 0.7;
+            transform: translate(-50%, -50%);
+            transition: opacity 0.3s;
+            box-shadow: 0 0 5px #ff00ff;
         }
         @media (min-width: 481px) {
             .container {
@@ -177,6 +213,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
 </head>
 <body>
+    <!-- Custom cursor elements -->
+    <div id="custom-cursor"></div>
     <div class="container">
         <div class="hero-text"></div>
         <img src="splif.jpg" alt="Pixel art wizard mage" class="hero-image">
@@ -218,8 +256,8 @@
     <table id="tgTable">
         <thead>
             <tr>
-                <th>Shems Simulation</th>
-                <th>Shems Lair</th>
+                <th>a) Shems Simulation</th>
+                <th>b) Shems Lair</th>
             </tr>
         </thead>
         <tbody>
@@ -234,25 +272,96 @@
     </div>
 
     <script>
+        // Custom cursor implementation
+        const cursor = document.getElementById('custom-cursor');
+        let trailElements = [];
+        const trailCount = 10;
+        let cursorEnabled = true;
+        
+        // Create trail elements
+        for (let i = 0; i < trailCount; i++) {
+            const trail = document.createElement('div');
+            trail.className = 'cursor-trail';
+            document.body.appendChild(trail);
+            trailElements.push(trail);
+        }
+        
+        // Track mouse position
+        let mouseX = 0;
+        let mouseY = 0;
+        let trailX = [];
+        let trailY = [];
+        
+        // Initialize trail positions
+        for (let i = 0; i < trailCount; i++) {
+            trailX[i] = mouseX;
+            trailY[i] = mouseY;
+        }
+        
+        // Update mouse position
+        document.addEventListener('mousemove', (e) => {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+        });
+        
+        // Update cursor and trail positions
+        function updateCursor() {
+            if (cursorEnabled) {
+                cursor.style.left = mouseX + 'px';
+                cursor.style.top = mouseY + 'px';
+            }
+            
+            for (let i = 0; i < trailCount; i++) {
+                const prevX = trailX[i];
+                const prevY = trailY[i];
+                
+                trailX[i] += (mouseX - prevX) * 0.15;
+                trailY[i] += (mouseY - prevY) * 0.15;
+                
+                trailElements[i].style.left = trailX[i] + 'px';
+                trailElements[i].style.top = trailY[i] + 'px';
+                
+                const scale = 1 - (i / trailCount) * 0.8;
+                trailElements[i].style.transform = `translate(-50%, -50%) scale(${scale})`;
+                
+                const opacity = 0.7 - (i / trailCount) * 0.6;
+                trailElements[i].style.opacity = opacity;
+            }
+            
+            requestAnimationFrame(updateCursor);
+        }
+        
+        // Add hover effects to interactive elements
+        const interactiveElements = document.querySelectorAll('button, a, input[type="checkbox"], .hero-image');
+        interactiveElements.forEach(el => {
+            el.addEventListener('mouseenter', () => {
+                if (cursorEnabled) cursor.classList.add('cursor-hover');
+            });
+            el.addEventListener('mouseleave', () => {
+                if (cursorEnabled) cursor.classList.remove('cursor-hover');
+            });
+        });
+        
+        // Crypto project data
         const cryptoProjects = [
             { name: "Ton Cat", symbol: "TCAT", completed: false, blockchain: "Ton", smartcontract: "EQBtDmYgCKk3ecQ1x-j0CLZRnPYyaV7cB33ad036QN-HE2C7", description: "Dedicated fan token to Meow. PPP driven crypto culture" },
             { name: "Fart Coin", symbol: "FART", completed: false, blockchain: "Solana", smartcontract: "9BB6NFEcjBCtnNLFko2FqVQBq8HHM13kCyYcdQbgpump", description: "Tokenising farts with the help of bots" }
         ];
-
+        
         function loadProgress() {
             const savedProgress = localStorage.getItem('cryptoProgress');
             return savedProgress ? JSON.parse(savedProgress) : cryptoProjects;
         }
-
+        
         function saveProgress(projects) {
             localStorage.setItem('cryptoProgress', JSON.stringify(projects));
         }
-
+        
         function renderTable() {
             const cryptoList = document.getElementById('cryptoList');
             cryptoList.innerHTML = '';
             const projects = loadProgress();
-
+            
             projects.forEach((project, index) => {
                 const row = document.createElement('tr');
                 row.innerHTML = `
@@ -266,15 +375,18 @@
                 cryptoList.appendChild(row);
             });
         }
-
+        
         function updateProgress(index, completed) {
             const projects = loadProgress();
             projects[index].completed = completed;
             saveProgress(projects);
             renderTable();
         }
-
-        document.addEventListener('DOMContentLoaded', renderTable);
+        
+        document.addEventListener('DOMContentLoaded', () => {
+            renderTable();
+            updateCursor();
+        });
     </script>
 </body>
 </html>
