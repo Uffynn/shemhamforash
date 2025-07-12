@@ -269,6 +269,7 @@
     </table>
     <div class="container">
         <button onclick="localStorage.removeItem('cryptoProgress'); renderTable();">Reset List</button>
+        <button id="cursorToggle" onclick="toggleCursor()">Disable Custom Cursor</button>
     </div>
 
     <script>
@@ -277,6 +278,7 @@
         let trailElements = [];
         const trailCount = 10;
         let cursorEnabled = true;
+        const cursorToggle = document.getElementById('cursorToggle');
         
         // Create trail elements
         for (let i = 0; i < trailCount; i++) {
@@ -341,6 +343,22 @@
                 if (cursorEnabled) cursor.classList.remove('cursor-hover');
             });
         });
+        
+        // Toggle cursor function
+        function toggleCursor() {
+            cursorEnabled = !cursorEnabled;
+            if (cursorEnabled) {
+                cursor.style.display = 'block';
+                trailElements.forEach(trail => trail.style.display = 'block');
+                document.body.style.cursor = 'none';
+                cursorToggle.textContent = 'Disable Custom Cursor';
+            } else {
+                cursor.style.display = 'none';
+                trailElements.forEach(trail => trail.style.display = 'none');
+                document.body.style.cursor = 'auto';
+                cursorToggle.textContent = 'Enable Custom Cursor';
+            }
+        }
         
         // Crypto project data
         const cryptoProjects = [
