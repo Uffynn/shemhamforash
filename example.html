@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shemhamforash</title>
+    <style>
+        body {
+            background: #1a1a2e;
+            color: #ff69b4;
+            font-family: 'Press Start 2P', cursive;
+            text-align: center;
+            margin: 0;
+            padding: 10px;
+            image-rendering: pixelated;
+        }
+        .container {
+            width: 90%;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 0 5%;
+        }
+        .hero-image {
+            max-width: 100px;
+            height: auto;
+            image-rendering: pixelated;
+            margin-bottom: 5px;
+            filter: drop-shadow(0 0 10px #ff69b4);
+        }
+        .hero-text {
+            font-size: 14px;
+            margin-bottom: 5px;
+            color: #ff69b4;
+            text-shadow: 1px 1px #ff00ff, -1px -1px #00ffff;
+        }
+        h1 {
+            font-size: 18px;
+            margin-bottom: 5px;
+            color: #ff69b4;
+            text-shadow: 1px 1px #ff00ff, -1px -1px #00ffff;
+        }
+        p {
+            font-size: 10px;
+            margin-bottom: 10px;
+            color: #ff69b4;
+        }
+        .section-title {
+            font-size: 14px;
+            margin: 10px 0;
+            color: #ff69b4;
+        }
+        table {
+            width: 100%;
+            margin: 0 auto;
+            border-collapse: collapse;
+            border: 2px solid #800080;
+            margin-bottom: 10px;
+            word-break: break-all;
+        }
+        #cryptoTable {
+            max-width: 100vw;
+        }
+        #promoTable {
+            max-width: 100vw;
+        }
+        #tgTable {
+            max-width: 100vw;
+        }
+        th, td {
+            padding: 5px;
+            border: 1px solid #800080;
+            font-size: 8px;
+            color: #ff69b4;
+            text-align: left;
+        }
+        th {
+            background: #2a2a3e;
+            color: #ff69b4;
+        }
+        #cryptoTable tbody tr:hover {
+            background-color: #2a2a3e;
+        }
+        #tgTable tbody tr:hover {
+            background-color: #2a2a3e;
+        }
+        #tgTable th, #tgTable td {
+            width: 50%;
+        }
+        #promoTable td {
+            text-align: center;
+            vertical-align: middle;
+            height: 100px; /* Added to ensure vertical centering is visible */
+        }
+        input[type="checkbox"] {
+            width: 14px;
+            height: 14px;
+            accent-color: #800080;
+        }
+        hr {
+            border: 1px solid #800080;
+            margin: 10px 0;
+        }
+        button {
+            background: #2a2a3e;
+            color: #ff69b4;
+            border: 1px solid #800080;
+            padding: 5px 10px;
+            font-family: 'Press Start 2P', cursive;
+            cursor: pointer;
+        }
+        button:hover {
+            background: #3a3a4e;
+        }
+        @media (min-width: 481px) {
+            .container {
+                padding: 20px 5%;
+            }
+            .hero-image {
+                max-width: 120px;
+            }
+            .hero-text {
+                font-size: 16px;
+            }
+            h1 {
+                font-size: 24px;
+            }
+            p {
+                font-size: 12px;
+            }
+            .section-title {
+                font-size: 16px;
+            }
+            th, td {
+                font-size: 10px;
+                padding: 8px;
+            }
+            input[type="checkbox"] {
+                width: 16px;
+                height: 16px;
+            }
+            table {
+                margin-bottom: 20px;
+            }
+            hr {
+                margin: 20px 0;
+            }
+        }
+        @media (min-width: 769px) {
+            .container {
+                padding: 20px 0;
+            }
+            .hero-image {
+                max-width: 150px;
+            }
+            .hero-text {
+                font-size: 18px;
+            }
+            h1 {
+                font-size: 28px;
+            }
+            p {
+                font-size: 14px;
+            }
+            .section-title {
+                font-size: 18px;
+            }
+            th, td {
+                font-size: 12px;
+                padding: 10px;
+            }
+            input[type="checkbox"] {
+                width: 18px;
+                height: 18px;
+            }
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <div class="hero-text"></div>
+        <img src="splif.jpg" alt="Pixel art wizard mage" class="hero-image">
+        <h1>Shemhamforash</h1>
+        <p>Track and follow the crypto projects that am keeping an eye on</p>
+        <hr>
+        <div class="section-title">Main Watchlist</div>
+    </div>
+    <table id="cryptoTable">
+        <thead>
+            <tr>
+                <th>Watched?</th>
+                <th>Project Name</th>
+                <th>Symbol</th>
+                <th>Blockchain</th>
+                <th>Smart Contracts</th>
+                <th>Description</th>
+            </tr>
+        </thead>
+        <tbody id="cryptoList">
+            <!-- Crypto projects will be populated here -->
+        </tbody>
+    </table>
+    <div class="section-title">Affiliate Links</div>
+    <table id="promoTable">
+        <thead>
+            <tr>
+                <th>BullX Neo</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Trade with me using the most powerful tool in the DeFi space, BullX Neo: <a href="https://neo.bullx.io/p/shemhamforash" style="color: #6a78d9; text-decoration: underline;">https://neo.bullx.io/p/shemhamforash</a>
+                <p></p><br> Don’t miss the opportunity to make money while the meme season is hot</td>
+            </tr>
+        </tbody>
+    </table>
+    <div class="section-title">Telegram Links</div>
+    <table id="tgTable">
+        <thead>
+            <tr>
+                <th>Shems Simulation</th>
+                <th>Shems Lair</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><a href="https://t.me/theshemssimulation" style="color: #ff69b4; text-decoration: underline;">@theshemssimulation</a></td>
+                <td><a href="https://t.me/shemslair" style="color: #ff69b4; text-decoration: underline;">@shemslair</a></td>
+            </tr>
+        </tbody>
+    </table>
+    <div class="container">
+        <button onclick="localStorage.removeItem('cryptoProgress'); renderTable();">Reset List</button>
+    </div>
+
+    <script>
+        const cryptoProjects = [
+            { name: "Ton Cat", symbol: "TCAT", completed: false, blockchain: "Ton", smartcontract: "EQBtDmYgCKk3ecQ1x-j0CLZRnPYyaV7cB33ad036QN-HE2C7", description: "Dedicated fan token to Meow. PPP driven crypto culture" },
+            { name: "Fart Coin", symbol: "FART", completed: false, blockchain: "Solana", smartcontract: "9BB6NFEcjBCtnNLFko2FqVQBq8HHM13kCyYcdQbgpump", description: "Tokenising farts with the help of bots" }
+        ];
+
+        function loadProgress() {
+            const savedProgress = localStorage.getItem('cryptoProgress');
+            return savedProgress ? JSON.parse(savedProgress) : cryptoProjects;
+        }
+
+        function saveProgress(projects) {
+            localStorage.setItem('cryptoProgress', JSON.stringify(projects));
+        }
+
+        function renderTable() {
+            const cryptoList = document.getElementById('cryptoList');
+            cryptoList.innerHTML = '';
+            const projects = loadProgress();
+
+            projects.forEach((project, index) => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td><input type="checkbox" ${project.completed ? 'checked' : ''} onchange="updateProgress(${index}, this.checked)"></td>
+                    <td>${project.name}</td>
+                    <td>${project.symbol}</td>
+                    <td>${project.blockchain}</td>
+                    <td>${project.smartcontract}</td>
+                    <td>${project.description}</td>
+                `;
+                cryptoList.appendChild(row);
+            });
+        }
+
+        function updateProgress(index, completed) {
+            const projects = loadProgress();
+            projects[index].completed = completed;
+            saveProgress(projects);
+            renderTable();
+        }
+
+        document.addEventListener('DOMContentLoaded', renderTable);
+    </script>
+</body>
+</html>
